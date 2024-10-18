@@ -1,11 +1,24 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { User } from "@prisma/client";
+import * as bcrypt from "bcrypt";
 import { PrismaService } from "src/services/prisma/prisma.service";
+import { CreateUserDto } from "./dto/create-user.dto";
 import { UserEntity } from "./entities/user-entity";
 
 @Injectable()
 export class UsersService {
 	constructor(private prisma: PrismaService) {}
+
+	async create(createUserDto: CreateUserDto): Promise<UserEntity> {
+		const data = {
+			...createUserDto,
+			password: await bcrypt.hash(createUserDto.password, 10),
+		};
+
+		const createdUser = await this.prisma.user.create({ data });
+
+		return new UserEntity(createdUser);
+	}
 
 	async findOne(
 		where: Partial<User>,
