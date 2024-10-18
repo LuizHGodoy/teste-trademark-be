@@ -1,16 +1,13 @@
 import {
-  Body,
   Controller,
   Get,
   HttpCode,
   HttpStatus,
-  Post,
-  Query,
+  Query
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { User } from "@prisma/client";
 import { IsPublic } from "src/common/decorators/is-public.decorator";
-import { CreateUserDto } from "./dto/create-user.dto";
 import { UserEntity } from "./entities/user-entity";
 import { UsersService } from "./users.service";
 
@@ -18,15 +15,6 @@ import { UsersService } from "./users.service";
 @Controller("usuarios")
 export class UserController {
   constructor(private readonly userService: UsersService) {}
-
-  @Post("/criar-usuario")
-  @HttpCode(HttpStatus.OK)
-  @ApiOperation({ summary: "Criar um novo usuario" })
-  @ApiResponse({ status: 201, description: "Usuario criado" })
-  @ApiResponse({ status: 409, description: "Usuario ja existe" })
-  async create(@Body() createUserDto: CreateUserDto) {
-    return this.userService.create(createUserDto);
-  }
 
   @Get()
   @HttpCode(HttpStatus.OK)
