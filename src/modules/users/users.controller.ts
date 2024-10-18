@@ -9,6 +9,7 @@ import {
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { User } from "@prisma/client";
+import { IsPublic } from "src/common/decorators/is-public.decorator";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UserEntity } from "./entities/user-entity";
 import { UsersService } from "./users.service";
@@ -36,6 +37,7 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @IsPublic()
   @Get("/:uuid")
   @HttpCode(HttpStatus.OK)
   @ApiOperation({ summary: "Listar um usuario pelo uuid" })
