@@ -29,6 +29,9 @@ export class TasksService {
 			where: {
 				userUuid,
 			},
+			orderBy: {
+				createdAt: "asc",
+			},
 		});
 
 		return tasks.map((task) => ({
