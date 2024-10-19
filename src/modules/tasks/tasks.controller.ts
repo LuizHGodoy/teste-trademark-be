@@ -28,8 +28,8 @@ export class TasksController {
   @ApiOperation({ summary: "Listar todas as tarefas" })
   @ApiResponse({ status: 200, description: "Lista de tarefas" })
   @ApiResponse({ status: 404, description: "Falha ao encontrar as tarefas" })
-  async findAll(): Promise<Partial<TaskEntity>[]> {
-    return this.tasksService.findAll()
+  async findAll(@CurrentUser() user: User): Promise<Partial<TaskEntity>[]> {
+    return this.tasksService.findAll(user.uuid)
   }
 
   @Get("/:uuid")

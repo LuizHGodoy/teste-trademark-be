@@ -24,8 +24,12 @@ export class TasksService {
 		return new TaskEntity(createdTask);
 	}
 
-	async findAll(): Promise<Partial<TaskEntity>[]> {
-		const tasks = await this.prisma.task.findMany();
+	async findAll(userUuid: string): Promise<Partial<TaskEntity>[]> {
+		const tasks = await this.prisma.task.findMany({
+			where: {
+				userUuid,
+			},
+		});
 
 		return tasks.map((task) => ({
 			...new TaskEntity(task),
