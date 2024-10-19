@@ -1,4 +1,4 @@
-# Projeto Backend de Tarefas
+# Projeto Backend Gerenciador de Tarefas
 
 Este é um projeto backend desenvolvido com NestJS e Prisma, que gerencia usuários e tarefas. O sistema inclui autenticação JWT e validação de dados.
 
