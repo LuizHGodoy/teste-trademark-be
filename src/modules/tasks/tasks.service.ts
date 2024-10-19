@@ -55,7 +55,7 @@ export class TasksService {
 	async update(
 		uuid: string,
 		updateTaskDto: UpdateTaskDto,
-	): Promise<Partial<TaskEntity>> {
+	): Promise<TaskEntity> {
 		const taskExists = await this.prisma.task.findFirst({ where: { uuid } });
 
 		if (!taskExists) {

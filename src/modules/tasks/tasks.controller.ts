@@ -39,7 +39,7 @@ export class TasksController {
   }
 
   @Patch('/:uuid')
-  async update(@Param('uuid') uuid: string, @Body() updateTaskDto: UpdateTaskDto): Promise<Partial<TaskEntity>> {
+  async update(@Param('uuid') uuid: string, @Body() updateTaskDto: Partial<UpdateTaskDto>): Promise<TaskEntity> {
     return this.tasksService.update(uuid, updateTaskDto);
   }
 
