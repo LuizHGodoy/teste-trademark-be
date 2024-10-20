@@ -6,7 +6,7 @@
 	"private": true,
 	"license": "UNLICENSED",
 	"scripts": {
-		"build": "npm ci && npm run build && npm run prisma:generate",
+		"build": "npm install && npm run build && npm run prisma:generate",
 		"start": "npm run prisma:migrate && npm run start:prod",
 		"start:dev": "nest start --watch",
 		"start:debug": "nest start --debug --watch",
