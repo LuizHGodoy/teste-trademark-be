@@ -4,11 +4,10 @@ import {
   Get,
   HttpCode,
   HttpStatus,
-  Post,
-  Query
+  Param,
+  Post
 } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { User } from "@prisma/client";
 import { IsPublic } from "src/common/decorators/is-public.decorator";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UserEntity } from "./entities/user-entity";
@@ -44,7 +43,7 @@ export class UserController {
   @ApiOperation({ summary: "Listar um usuario pelo uuid" })
   @ApiResponse({ status: 200, description: "Usuario encontrado" })
   @ApiResponse({ status: 404, description: "Usuario nao encontrado" })
-  async findOne(@Query() createUserDto: Partial<User>) {
-    return this.userService.findOne(createUserDto);
+  async findOne(@Param('uuid') uuid: string): Promise<UserEntity | undefined> {
+    return this.userService.findOne({uuid});
   }
 }

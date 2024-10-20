@@ -20,9 +20,7 @@ export class UsersService {
 		return new UserEntity(createdUser);
 	}
 
-	async findOne(
-		where: Partial<User>,
-	): Promise<Partial<UserEntity | undefined>> {
+	async findOne(where: Partial<User>): Promise<UserEntity | undefined> {
 		const user = await this.prisma.user.findFirst({ where });
 
 		if (!user) {
